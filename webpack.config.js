@@ -1,32 +1,24 @@
-var path = require('path');
+let path = require('path');
 
-var config = {
-    context: path.join(__dirname, 'app'),
-    entry: [
-        './main.js'
-    ],
+let BUILD_DIR = path.resolve(__dirname, 'src/client/build');
+let APP_DIR = path.resolve(__dirname, 'src/client/app');
+
+let config = {
+    entry: APP_DIR + '/index.jsx',
     output: {
-        path: path.join(__dirname, 'www'),
-        filename: 'bundle.js'
+        path: BUILD_DIR,
+        filename: 'bundle.js',
       },
-    resolveLoader: {
-        root: [
-            path.join(__dirname, 'node_modules')
-        ]
-      },
+
     module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loaders: ['babel']
-              }
-        ]
+        loaders: [{
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+          },
+        ],
       },
-    resolve: {
-        root: [
-            path.join(__dirname, 'node_modules')
-        ]
-      }
   };
+
+
 module.exports = config;

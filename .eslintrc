@@ -1,0 +1,15 @@
+{
+  "extends": "google",
+  "plugins": ["react"],
+  "parser": "babel-eslint",
+  "linebreak-style": ["error", "unix"],
+
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  }
+
+}
