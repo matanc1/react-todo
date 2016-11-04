@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/matanc1/todo-practice/issues"
   },
-  "homepage": "https://github.com/matanc1/react-todo#readme"
+  "homepage": "https://github.com/matanc1/react-todo#readme",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0"
+  }
 }
