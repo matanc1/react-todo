@@ -1,0 +1,19 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "Learning React, Node & more using the Todo List example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matanc1/todo-practice"
+  },
+  "author": "Matan Cohen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matanc1/todo-practice/issues"
+  },
+  "homepage": "https://github.com/matanc1/react-todo#readme"
+}
