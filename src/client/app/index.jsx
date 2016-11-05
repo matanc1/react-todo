@@ -26,6 +26,7 @@ class TodoApp extends React.Component {
             let currItems = this.state.todoItems.slice();
             let newItem = TodoItems.createTodoItem(currItems.length, event.target.value, this.deleteItem);
             currItems.push(newItem);
+            TodoDB.addItem(currItems.length, event.target.value);
             this.setState({todoItems: currItems});
             event.target.value = '';
         }
@@ -44,6 +45,7 @@ class TodoApp extends React.Component {
         }
 
         this.setState({todoItems: newItems});
+        TodoDB.deleteItem(index);
     }
 
     render() {

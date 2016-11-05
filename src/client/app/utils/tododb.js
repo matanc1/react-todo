@@ -18,4 +18,14 @@ export default class TodoDB{
             setCallback(todoItems);
         });
     }
+
+    static addItem(index, value){
+        axios.post('/send/data', {index: index, value: value}).then(
+            function(res){});
+    }
+
+    static deleteItem(index){
+        axios.post('/delete', {index: index}).then(
+            function(res){});
+    }
 }
