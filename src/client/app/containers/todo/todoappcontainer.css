@@ -1,0 +1,23 @@
+.todo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+.todo-container{
+    width: 50%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+                0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+.todo-container ol{
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    background: white;
+}
+

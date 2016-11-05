@@ -3,10 +3,24 @@
     justify-content: space-between;
     line-height: 1.2;
     font-size: 24px;
+    width: 100%;
+    background: inherit;
+    padding: 10px;
+    border-bottom: 1px solid #bdbcbc;
+    box-sizing: border-box;
 }
 
-.tod-item a:hover{
-    background-color: gray;
-    border-radius: 50px;
-    display: inline-block;
+.todo-item .delete-btn:after{
+    content: '×';
+}
+
+.todo-item .delete-btn{
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+    font: 1em arial;
+    color: #bd7e72;
+}
+
+.todo-item .delete-btn:hover{
+    color: #bd0d01;
 }
