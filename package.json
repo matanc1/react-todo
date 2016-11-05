@@ -4,7 +4,8 @@
   "description": "Learning React, Node & more using the Todo List example",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack -d --color --progress --display-error-details --watch"
+    "dev": "webpack-dev-server --inline --hot",
+    "build": "webpack --color --progress --display-error-details --devtool source-map"
   },
   "repository": {
     "type": "git",
@@ -22,9 +23,11 @@
     "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
+    "css-loader": "^0.25.0",
     "eslint": "^3.9.1",
     "eslint-config-google": "^0.7.0",
     "eslint-plugin-react": "^6.5.0",
+    "style-loader": "^0.13.1",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
   },
