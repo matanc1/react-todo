@@ -9,12 +9,16 @@ require('./utils/app.css');
 class TodoApp extends React.Component {
     constructor(){
         super();
-        this.state = {
-            todoItems: TodoDB.getInitialTodoItems()
-        };
-
+        this.state = {todoItems: []};
         this.addItem = this.addItem.bind(this);
+        this.setItems = this.setItems.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+
+        TodoDB.setInitialTodoItems(this.setItems, this.deleteItem);
+    }
+
+    setItems(items){
+        this.setState({todoItems: items});
     }
 
     addItem(event){
