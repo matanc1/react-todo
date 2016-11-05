@@ -8,10 +8,10 @@ import TodoItems from '../components/todoitem/todoitem.jsx';
 export default class TodoDB{
     static setInitialTodoItems(setCallback, deleteFunc) {
         axios.get('/get/data').then(function(response){
-            let items = response.data.todoItems;
+            let items = response.data;
             let todoItems = [];
             for (let item of items){
-                let newItem = TodoItems.createTodoItem(item.index,item.content,deleteFunc);
+                let newItem = TodoItems.createTodoItem(item.index, item.value, deleteFunc);
                 todoItems.push(newItem);
             }
 
@@ -24,8 +24,8 @@ export default class TodoDB{
             function(res){});
     }
 
-    static deleteItem(index){
-        axios.post('/delete', {index: index}).then(
+    static deleteItem(newItems){
+        axios.post('/delete', newItems).then(
             function(res){});
     }
 }

@@ -19,10 +19,11 @@ npm run build
 ```
 
 
-Run Dev Server
---------------
+Run Server
+----------
+For this to work, all files must be put in <Project Directory>/bin as the server is run from there (and assumes assets are there as well)
 
 ```
-npm run dev
+npm run serve
 ```
 

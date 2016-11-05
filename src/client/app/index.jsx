@@ -35,17 +35,19 @@ class TodoApp extends React.Component {
     deleteItem(index){
         let currItems = this.state.todoItems.slice();
         let newItems = [];
+        let updateItems = [];
         currItems.splice(index,1);
 
         let i=0;
         for(var todo of currItems){
             let newItem = TodoItems.createTodoItem(i, todo.props.value, this.deleteItem);
             newItems.push(newItem);
+            updateItems.push({index: i, value: todo.props.value});
             i++;
         }
 
         this.setState({todoItems: newItems});
-        TodoDB.deleteItem(index);
+        TodoDB.deleteItem(updateItems);
     }
 
     render() {
