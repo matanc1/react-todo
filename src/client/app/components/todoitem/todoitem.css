@@ -2,12 +2,13 @@
     display: flex;
     justify-content: space-between;
     line-height: 1.2;
-    font-size: 24px;
+    font-size: 22px;
     width: 100%;
     background: inherit;
     padding: 10px;
     border-bottom: 1px solid #bdbcbc;
     box-sizing: border-box;
+    font-family: arial, sans-serif;
 }
 
 .todo-item .delete-btn:after{

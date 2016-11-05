@@ -13,11 +13,11 @@ class TodoApp extends React.Component {
             todoItems: TodoDB.getInitialTodoItems()
         };
 
-        this.onEnter = this.onEnter.bind(this);
+        this.addItem = this.addItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
     }
 
-    onEnter(event){
+    addItem(event){
         if(event.key == 'Enter'){
             let currItems = this.state.todoItems.slice();
             let newItem = TodoItems.createTodoItem(currItems.length, event.target.value, this.deleteItem);
@@ -27,25 +27,24 @@ class TodoApp extends React.Component {
         }
     }
 
-    deleteItem(id){
+    deleteItem(index){
         let currItems = this.state.todoItems.slice();
-        let index = currItems.findIndex((x)=>x.key==id);
-        console.log("Before deleting");
-        for(var i of this.state.todoItems){
-            console.log(i);
-        }
-        console.log("Delete Element at place: " + index.toString());
+        let newItems = [];
         currItems.splice(index,1);
-        this.setState({todoItems: currItems});
+
+        let i=0;
+        for(var todo of currItems){
+            let newItem = TodoItems.createTodoItem(i, todo.props.value, this.deleteItem);
+            newItems.push(newItem);
+            i++;
+        }
+
+        this.setState({todoItems: newItems});
     }
 
     render() {
-        console.log("Rendering");
-        for(var i of this.state.todoItems){
-            console.log(i);
-        }
         return (
-            <TodoAppContainer todoItems={this.state.todoItems} onEnter={this.onEnter}/>
+            <TodoAppContainer todoItems={this.state.todoItems} onEnter={this.addItem}/>
         );
     }
 }
