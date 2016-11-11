@@ -3,29 +3,19 @@
  */
 import React from 'react';
 import axios from 'axios';
-import TodoItems from '../components/todoitem/todoitem.jsx';
 
-export default class TodoDB{
-    static setInitialTodoItems(setCallback, deleteFunc) {
-        axios.get('/get/data').then(function(response){
-            let items = response.data;
-            let todoItems = [];
-            for (let item of items){
-                let newItem = TodoItems.createTodoItem(item.index, item.value, deleteFunc);
-                todoItems.push(newItem);
-            }
-
-            setCallback(todoItems);
-        });
+export default class TodoDB {
+    static getInitialTodoItems() {
+        return axios.get('/get/data')
+            .then(response => response.data);
     }
 
-    static addItem(index, value){
-        axios.post('/send/data', {index: index, value: value}).then(
-            function(res){});
+    static addItem(value) {
+        return axios.post('/send/data', {value: value})
+            .then((response) => response.data );
     }
 
-    static deleteItem(newItems){
-        axios.post('/delete', newItems).then(
-            function(res){});
+    static deleteItem(id) {
+        return axios.post('/delete', {id: id});
     }
 }

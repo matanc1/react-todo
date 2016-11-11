@@ -2,57 +2,51 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoAppContainer from './containers/todo/todoappcontainer.jsx';
 import TodoDB from './utils/tododb.js';
-import TodoItems from './components/todoitem/todoitem.jsx';
-
 require('./utils/app.css');
 
 class TodoApp extends React.Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {todoItems: []};
         this.addItem = this.addItem.bind(this);
-        this.setItems = this.setItems.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
 
-        TodoDB.setInitialTodoItems(this.setItems, this.deleteItem);
+        TodoDB.getInitialTodoItems()
+                .then(todoItems => {
+                    this.setState({todoItems: todoItems});
+                });
     }
 
-    setItems(items){
-        this.setState({todoItems: items});
-    }
-
-    addItem(event){
-        if(event.key == 'Enter'){
-            let currItems = this.state.todoItems.slice();
-            let newItem = TodoItems.createTodoItem(currItems.length, event.target.value, this.deleteItem);
-            currItems.push(newItem);
-            TodoDB.addItem(currItems.length, event.target.value);
-            this.setState({todoItems: currItems});
-            event.target.value = '';
+    addItem(event) {
+        if (event.key == 'Enter') {
+            const value = event.target.value;
+            const target = event.target;
+            TodoDB.addItem(event.target.value)
+                .then((createdId) => {
+                    const currState = this.state.todoItems;
+                    const newState = currState.concat({id: createdId, value: value});
+                    this.setState({todoItems: newState});
+                    target.value = '';
+                });
         }
     }
 
-    deleteItem(index){
-        let currItems = this.state.todoItems.slice();
-        let newItems = [];
-        let updateItems = [];
-        currItems.splice(index,1);
-
-        let i=0;
-        for(var todo of currItems){
-            let newItem = TodoItems.createTodoItem(i, todo.props.value, this.deleteItem);
-            newItems.push(newItem);
-            updateItems.push({index: i, value: todo.props.value});
-            i++;
-        }
-
-        this.setState({todoItems: newItems});
-        TodoDB.deleteItem(updateItems);
+    deleteItem(id) {
+        TodoDB.deleteItem(id)
+            .then((response) => {
+                if (response.status == 200) {
+                    const todoItemsAfterDelete = this.state.todoItems.filter((item) => item.id != id);
+                    this.setState({todoItems: todoItemsAfterDelete});
+                }
+                else {
+                    console.log('Error deleting item: ${id}');
+                }
+            });
     }
 
     render() {
         return (
-            <TodoAppContainer todoItems={this.state.todoItems} onEnter={this.addItem}/>
+            <TodoAppContainer todoItems={this.state.todoItems} onEnter={this.addItem} onItemDel={this.deleteItem}/>
         );
     }
 }
