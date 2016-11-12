@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoAppContainer from './containers/todo/todoappcontainer.jsx';
 import TodoDB from './utils/tododb.js';
+import 'babel-polyfill'
 require('./utils/app.css');
 
 class TodoApp extends React.Component {
@@ -17,31 +18,28 @@ class TodoApp extends React.Component {
                 });
     }
 
-    addItem(event) {
+    setTodoItems(todoItems){
+        this.setState({todoItems: todoItems});
+    }
+
+    async addItem(event) {
         if (event.key == 'Enter') {
             const value = event.target.value;
             const target = event.target;
-            TodoDB.addItem(event.target.value)
-                .then((createdId) => {
-                    const currState = this.state.todoItems;
-                    const newState = currState.concat({id: createdId, value: value});
-                    this.setState({todoItems: newState});
-                    target.value = '';
-                });
+            const createdId = await TodoDB.addItem(event.target.value);
+            this.setTodoItems(this.state.todoItems.concat({id: createdId, value: value}));
+            target.value = '';
         }
     }
 
-    deleteItem(id) {
-        TodoDB.deleteItem(id)
-            .then((response) => {
-                if (response.status == 200) {
-                    const todoItemsAfterDelete = this.state.todoItems.filter((item) => item.id != id);
-                    this.setState({todoItems: todoItemsAfterDelete});
-                }
-                else {
-                    console.log('Error deleting item: ${id}');
-                }
-            });
+    async deleteItem(id) {
+        let response = await TodoDB.deleteItem(id);
+        if (response.status == 200) {
+            this.setTodoItems(this.state.todoItems.filter((item) => item.id != id));
+        }
+        else {
+            console.log('Error deleting item: ${id}');
+        }
     }
 
     render() {
