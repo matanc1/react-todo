@@ -18,11 +18,11 @@ app.listen(3000, function () {
 });
 
 app.get('/get/data', function (req, res) {
-    Todo.find({}, function (err, users) {
+    Todo.find({}, function (err, todos) {
         if (err)
             console.log("Error getting users");
-        const usersToSend = users.map(user => { return {id: user._id, value: user.value}});
-        res.send(JSON.stringify(usersToSend));
+        const todosToSend = todos.map(todo => { return {todoId: todo._id, text: todo.value}});
+        res.send(JSON.stringify(todosToSend));
     });
 });
 
@@ -32,7 +32,7 @@ app.post('/send/data', function (req, res) {
     newTodo.save(function (err, todo) {
         if (err)
             console.log('Error!');
-        res.send(todo.id);
+        res.send(todo._id);
     });
 });
 
