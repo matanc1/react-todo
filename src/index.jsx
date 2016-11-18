@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TodoAppContainer from './containers/todo/todoappcontainer.jsx';
-import TodoDB from './utils/tododb.js';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import TodoAppContainer from './containers/todo/todoappcontainer.jsx'
+import TodoDB from './utils/tododb.js'
 import 'babel-polyfill'
-require('./utils/app.css');
+require('./app.css');
 
 class TodoApp extends React.Component {
     constructor() {
@@ -18,16 +18,18 @@ class TodoApp extends React.Component {
                 });
     }
 
-    setTodoItems(todoItems){
+    setTodoItems(todoItems) {
         this.setState({todoItems: todoItems});
     }
+
 
     async addItem(event) {
         if (event.key == 'Enter') {
             const value = event.target.value;
             const target = event.target;
             const createdId = await TodoDB.addItem(event.target.value);
-            this.setTodoItems(this.state.todoItems.concat({id: createdId, value: value}));
+            this.setTodoItems(this.state.todoItems.concat({id: createdId,
+                                                            value: value}));
             target.value = '';
         }
     }
@@ -35,7 +37,8 @@ class TodoApp extends React.Component {
     async deleteItem(id) {
         let response = await TodoDB.deleteItem(id);
         if (response.status == 200) {
-            this.setTodoItems(this.state.todoItems.filter((item) => item.id != id));
+            this.setTodoItems(this.state.todoItems.filter((item) =>
+                                                            item.id != id));
         }
         else {
             console.log('Error deleting item: ${id}');
@@ -44,7 +47,9 @@ class TodoApp extends React.Component {
 
     render() {
         return (
-            <TodoAppContainer todoItems={this.state.todoItems} onEnter={this.addItem} onItemDel={this.deleteItem}/>
+            <TodoAppContainer todoItems={this.state.todoItems}
+                              onEnter={this.addItem}
+                              onItemDel={this.deleteItem}/>
         );
     }
 }

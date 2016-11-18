@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import InsertBox from '../../components/insertbox/insertbox.jsx'
 import TodoItem from '../../components/todoitem/todoitem.jsx'
 
@@ -12,7 +12,8 @@ export default class TodoAppContainer extends React.Component {
                     <InsertBox onEnter={this.props.onEnter}/>
                     <ol>
                         {this.props.todoItems.map(
-                            todo => TodoItem.createTodoItem(todo.id, todo.value, this.props.onItemDel)
+                            (todo) => TodoItem.createTodoItem(todo.id,
+                                todo.value, this.props.onItemDel)
                         )}
                     </ol>
                 </div>

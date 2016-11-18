@@ -4,9 +4,8 @@
   "description": "Learning React, Node & more using the Todo List example",
   "main": "index.js",
   "scripts": {
-    "dev-server": "webpack-dev-server --inline --hot",
     "build": "webpack --color --progress --display-error-details --devtool source-map",
-    "serve": "node_modules\\.bin\\nodemon --watch bin bin\\server.js"
+    "dev": "node_modules\\.bin\\babel-node tools\\dev.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +18,7 @@
   },
   "homepage": "https://github.com/matanc1/todo-practice#readme",
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.7",
@@ -30,6 +30,7 @@
     "eslint": "^3.9.1",
     "eslint-config-google": "^0.7.0",
     "eslint-plugin-react": "^6.5.0",
+    "file-loader": "^0.9.0",
     "nodemon": "^1.11.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3",
