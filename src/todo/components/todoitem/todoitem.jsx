@@ -6,15 +6,15 @@ export default class TodoItem extends React.Component {
     render() {
         return (
             <div className="todo-item">
-                <li>{this.props.value}</li>
-                <a onClick={()=>this.props.deleteItem(this.props.id)}
+                <li>{this.props.text}</li>
+                <a onClick={()=>this.props.deleteTodo(this.props.todoId)}
                                                 className="delete-btn" href="#"/>
             </div>
         )
     }
 
-    static createTodoItem(id, content, deleteItemFunc){
-        return <TodoItem id={id} key={id} value={content}
-                                                deleteItem={deleteItemFunc} />;
+    static createTodoItem(todoId, text, deleteTodoFunc){
+        return <TodoItem todoId={todoId} key={todoId} text={text}
+                                                deleteTodo={deleteTodoFunc} />;
     }
 }

@@ -7,3 +7,5 @@ import {todoApp} from './reducers.js'
 
 
 const store = createStore(todoApp);
+
+export {store};

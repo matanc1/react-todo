@@ -2,9 +2,7 @@
  * Created by matan on 18/11/2016.
  */
 
-const ADD_TODO = "ADD_TODO";
-const REMOVE_TODO = "REMOVE_TODO";
-
+import {ADD_TODO, REMOVE_TODO} from './actiontypes.js'
 
 function addTodo(text) {
     return {

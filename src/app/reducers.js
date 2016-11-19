@@ -2,14 +2,10 @@
  * Created by matan on 18/11/2016.
  */
 
-import  {ADD_TODO, REMOVE_TODO} from './actions.js'
+import  {ADD_TODO, REMOVE_TODO} from '../todo/todoapp.actions.js'
 import { combineReducers } from 'redux'
 
-let initialState = {
-    todos: []
-};
-
-function todos(state = [], action) {
+function todosAction(state = [], action) {
     switch (action.type) {
         case ADD_TODO:
             return [...state, {
@@ -25,13 +21,8 @@ function todos(state = [], action) {
     }
 }
 
-
-function app(state = initialState, action){
-    return {
-        todos: todos(state.todos)
-    }
-}
-
-const todoApp = combineReducers({app});
+const todoApp = combineReducers({
+    todos: todosAction
+});
 
 export {todoApp};
